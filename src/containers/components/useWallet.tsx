@@ -7,15 +7,16 @@ import { Contract } from 'web3-eth-contract';
 import { AbiItem } from 'web3-utils';
 import Web3Modal from 'web3modal';
 import ERC20ABI from '../../config/ERC20ABI.json';
+import { useAccount } from '../../context';
 import { bnToDec, decToHexString, getKeys, isClientSide } from '../../utils';
 
 type Web3Provider = WebsocketProvider & MetaMaskInpageProvider;
 
 export const useWallet = () => {
+  const { account, setAccount } = useAccount();
   const [provider, setProvider] = useState<null | WebsocketProvider>(null);
   const [web3Modal, setWeb3Modal] = useState<null | Web3Modal>(null);
   const [web3Library, setWeb3Library] = useState<null | Web3>(null);
-  const [account, setAccount] = useState<null | string>(null);
   const [networkId, setNetworkId] = useState<null | number>(null);
   const [balance, setBalance] = useState<null | Record<TokenKeys, number>>(
     null
@@ -25,7 +26,7 @@ export const useWallet = () => {
     setWeb3Modal(null);
     setWeb3Library(null);
     setAccount(null);
-  }, []);
+  }, [setAccount]);
 
   const connectWallet = useCallback(async () => {
     if (!isClientSide) {
@@ -89,7 +90,7 @@ export const useWallet = () => {
 
     const balance = await getBalance(web3Library, account, tokens);
     setBalance(balance);
-  }, [account, web3Library]);
+  }, [account, setAccount, web3Library]);
 
   useEffect(() => {
     if (!networkId) {
@@ -132,7 +133,7 @@ export const useWallet = () => {
         provider.removeListener('disconnect', resetState);
       };
     }
-  }, [provider, resetState, switchNetworkToEthereum]);
+  }, [provider, resetState, setAccount, switchNetworkToEthereum]);
 
   return { account, connectWallet, disconnectWallet, balance };
 };

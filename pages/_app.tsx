@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { AccountProvider } from '../src/context';
 import '../src/global.css';
 
 const NFTApp = ({ Component, pageProps }: AppProps) => {
@@ -8,8 +9,9 @@ const NFTApp = ({ Component, pageProps }: AppProps) => {
       <Head>
         <title>NFT app</title>
       </Head>
-
-      <Component {...pageProps} />
+      <AccountProvider>
+        <Component {...pageProps} />
+      </AccountProvider>
     </>
   );
 };
