@@ -1,0 +1,23 @@
+# Project
+node_modules/
+.*
+!.babelrc
+*.log
+*.sh
+*.tsbuildinfo
+*.gz
+yarn.lock
+/lib
+/dist
+/coverage
+/build
+/coverage
+
+# Images
+*.svg
+*.jpg
+*.png
+*.cur
+
+# markdown
+*.md

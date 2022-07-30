@@ -1,0 +1,81 @@
+{
+  "name": "react-next-starter-kit",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf ./.next ./.linaria-cache ./coverage",
+    "build": "yarn clean && next build",
+    "dev": "yarn clean && next",
+    "start": "next start",
+    "lint": "yarn lint:ts && yarn lint:commitlint && yarn lint:prettier && yarn lint:eslint && yarn lint:stylelint",
+    "lint:ts": "tsc",
+    "lint:commitlint": "yarn commitlint -c commitlint.config.js",
+    "lint:eslint": "eslint --ext .js,.jsx,.ts,.tsx ./ --color --cache",
+    "lint:prettier": "prettier -c ./",
+    "lint:stylelint": "stylelint **/*.{ts,tsx}",
+    "test": "cross-env NODE_ENV=test jest",
+    "test:watch": "jest --watch",
+    "healthcheck": "yarn lint && yarn test && yarn build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{json,md}": [
+      "prettier --write"
+    ],
+    "*.(ts,tsx)": [
+      "tsc --noEmit",
+      "prettier --write",
+      "stylelint",
+      "eslint --color --fix --cache"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.13.8",
+    "@babel/plugin-proposal-optional-chaining": "^7.13.12",
+    "@commitlint/config-conventional": "^12.1.1",
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "@types/jest": "^26.0.22",
+    "@types/react": "^17.0.3",
+    "@types/ts-nameof": "^4.2.1",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.21.0",
+    "babel-plugin-ts-nameof": "^4.2.1",
+    "commitlint": "^12.1.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.23.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.5",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.4",
+    "next": "^10.1.3",
+    "next-compose-plugins": "^2.2.1",
+    "next-images": "^1.7.0",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "stylelint": "^13.12.0",
+    "stylelint-config-standard": "^21.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-order": "^4.1.0",
+    "stylelint-processor-styled-components": "^1.10.0",
+    "ts-nameof": "^5.0.0",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/material": "^5.9.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "web3": "^1.7.4",
+    "web3modal": "^1.9.8"
+  }
+}
