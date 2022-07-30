@@ -7,12 +7,7 @@ import { Contract } from 'web3-eth-contract';
 import { AbiItem } from 'web3-utils';
 import Web3Modal from 'web3modal';
 import ERC20ABI from '../../config/ERC20ABI.json';
-import {
-  calculateAmount,
-  decToHexString,
-  getKeys,
-  isClientSide
-} from '../../utils';
+import { bnToDec, decToHexString, getKeys, isClientSide } from '../../utils';
 
 type Web3Provider = WebsocketProvider & MetaMaskInpageProvider;
 
@@ -186,7 +181,7 @@ const getBalance = async (
     const decimals = await contract.methods.decimals().call();
     const balance = await contract.methods.balanceOf(account).call();
 
-    return calculateAmount(decimals, balance);
+    return bnToDec(balance, decimals);
   });
 
   const result = await Promise.all(balanceRequests);

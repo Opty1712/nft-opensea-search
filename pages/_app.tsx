@@ -7,13 +7,6 @@ const NFTApp = ({ Component, pageProps }: AppProps) => {
     <>
       <Head>
         <title>NFT app</title>
-        <style jsx global>{`
-          body {
-            padding: 0;
-            margin: 0;
-            height: 100%;
-          }
-        `}</style>
       </Head>
 
       <Component {...pageProps} />
