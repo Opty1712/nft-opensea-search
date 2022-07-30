@@ -72,6 +72,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
+    "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.9.3",
     "@metamask/providers": "^9.0.0",
     "@mui/material": "^5.9.2",
