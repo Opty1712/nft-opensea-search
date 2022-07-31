@@ -7,6 +7,7 @@ import createEmotionCache from '../src/createEmotionCache';
 export default class MyDocument extends Document<{
   emotionStyleTags: JSX.Element[];
 }> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static async getInitialProps(ctx: any) {
     const initialProps = await Document.getInitialProps(ctx);
 
@@ -54,6 +55,7 @@ MyDocument.getInitialProps = async (ctx) => {
 
   ctx.renderPage = () =>
     originalRenderPage({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       enhanceApp: (App: any) =>
         function EnhanceApp(props: AppProps) {
           return <App emotionCache={cache} {...props} />;

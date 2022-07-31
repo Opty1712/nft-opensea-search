@@ -13,9 +13,7 @@
     "lint:eslint": "eslint --ext .js,.jsx,.ts,.tsx ./ --color --cache",
     "lint:prettier": "prettier -c ./",
     "lint:stylelint": "stylelint **/*.{ts,tsx}",
-    "test": "cross-env NODE_ENV=test jest",
-    "test:watch": "jest --watch",
-    "healthcheck": "yarn lint && yarn test && yarn build"
+    "healthcheck": "yarn lint && yarn build"
   },
   "husky": {
     "hooks": {
