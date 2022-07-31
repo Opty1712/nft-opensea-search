@@ -22,3 +22,8 @@ Tech Stack: Use React.Js or Next.Js, alongside Material UI for components.
 Because `OpenSea API key` is not free, I used the `Moralis API` instead, therefore not all of the filters can be implemented.
 
 →→→→→→→→→→ 🔥 **<a href="https://nft-search-snowy.vercel.app/" target="_blank">Demo</a>** 🔥 ←←←←←←←←←←
+
+## Run project locally
+1. Install all dependencies with `yarn`
+2. Run `yarn dev` for development or `yarn build && yarn start` for production build
+3. Navigate your browser to [app](http://localhost:3000/)
