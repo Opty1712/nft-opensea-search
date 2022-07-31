@@ -70,8 +70,7 @@ const columns: GridColDef[] = [
   {
     field: 'token_id',
     headerName: 'ID',
-    minWidth: 100,
-    flex: 0.1,
+    flex: 0.2,
     headerClassName: headerStyle
   },
   {
@@ -84,8 +83,7 @@ const columns: GridColDef[] = [
   {
     field: 'image',
     headerName: 'Image',
-    flex: 0.1,
-    minWidth: 120,
+    flex: 0.3,
     headerClassName: headerStyle,
     renderCell: renderImage
   }
