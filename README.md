@@ -16,3 +16,9 @@ Note: This task has a 50% weightage towards Engineering and 50% weightage toward
 Original Designs will be preferred, compared to out of the box UI library components.
 
 Tech Stack: Use React.Js or Next.Js, alongside Material UI for components.
+
+## Solution
+
+Because `OpenSea API key` is not free, I used the `Moralis API` instead, therefore not all of the filters can be implemented.
+
+→→→→→→→→→→ 🔥 **<a href="https://nft-search-snowy.vercel.app/" target="_blank">Demo</a>** 🔥 ←←←←←←←←←←
