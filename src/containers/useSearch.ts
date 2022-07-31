@@ -4,19 +4,36 @@ import { APIItem, MetaDataJSON, NFTItem } from './types';
 
 export const useSearch = (account: string | null) => {
   const [search, setSearch] = useState('');
+
+  const [fromDate, setFromDate] = useState<Date>(() => {
+    const date = new Date();
+    date.setFullYear(date.getFullYear() - 1);
+
+    return date;
+  });
+
+  const [toDate, setToDate] = useState<Date>(new Date());
   const { isSwitchedOn, switchOff, switchOn } = useSwitcher();
   const [searchResults, setSearchResults] = useState<Array<NFTItem>>([]);
 
   const handleFetch = useCallback(async () => {
+    if (search.length < 3) {
+      return;
+    }
+
     switchOn();
 
-    await fetchTokens()
+    fetchTokens({
+      q: search,
+      from_date: fromDate.toISOString(),
+      to_date: toDate.toISOString()
+    })
       .then((result) => {
         setSearchResults(extractTokens(result.result));
       })
       .catch((error) => console.error(error))
       .finally(switchOff);
-  }, [switchOff, switchOn]);
+  }, [fromDate, search, switchOff, switchOn, toDate]);
 
   useEffect(() => {
     if (!account) {
@@ -26,7 +43,16 @@ export const useSearch = (account: string | null) => {
     handleFetch();
   }, [search, account, handleFetch]);
 
-  return { search, setSearch, searchResults, isLoading: isSwitchedOn };
+  return {
+    search,
+    setSearch,
+    searchResults,
+    isLoading: isSwitchedOn,
+    fromDate,
+    toDate,
+    setFromDate,
+    setToDate
+  };
 };
 
 type APIAnswer = {
@@ -36,9 +62,18 @@ type APIAnswer = {
   total: number;
 };
 
-function fetchTokens<T = APIAnswer>(): Promise<T> {
-  return fetch(
-    'https://deep-index.moralis.io/api/v2/nft/search?chain=eth&format=decimal&filter=name&q=star',
+type FetchTokensParams = {
+  q: string;
+  from_date?: string;
+  to_date?: string;
+};
+async function fetchTokens<T = APIAnswer>(
+  params: FetchTokensParams
+): Promise<T> {
+  const response = await fetch(
+    `https://deep-index.moralis.io/api/v2/nft/search?chain=eth&format=decimal&filter=name&${buildQuery(
+      params
+    )}`,
     {
       method: 'GET',
       headers: {
@@ -47,13 +82,12 @@ function fetchTokens<T = APIAnswer>(): Promise<T> {
           'jbWrgmADlNz72pcGr6o1MUIqakKZUsUrrap4kiliJsYpwIvcZ7J8025hqSZBcgUW'
       }
     }
-  ).then((response) => {
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
+  );
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
 
-    return response.json() as Promise<T>;
-  });
+  return await (response.json() as Promise<T>);
 }
 
 const checkIsMetaDataExists = (value: unknown): value is MetaDataJSON =>
@@ -76,7 +110,7 @@ const extractTokens = (tokens: Array<APIItem>): Array<NFTItem> => {
             ? metadataJSON[item] || ''
             : '';
 
-        token[item] = convertIPFSURL(value);
+        token[item] = convertIPFSToURL(value);
       });
     }
 
@@ -84,10 +118,27 @@ const extractTokens = (tokens: Array<APIItem>): Array<NFTItem> => {
   });
 };
 
-const convertIPFSURL = (url: string) => {
+const convertIPFSToURL = (url: string) => {
   if (url.startsWith('')) {
     return url.replace('ipfs://', 'https://ipfs.io/ipfs/');
   }
 
   return url;
+};
+
+const buildQuery = (args: FetchTokensParams): string => {
+  const queryArray = getKeys(args).reduce<Array<string | number>>(
+    (accumulator, key) => {
+      const value = args[key];
+
+      if (typeof value === 'string' || typeof value === 'number') {
+        accumulator.push(`${key}=${value}`);
+      }
+
+      return accumulator;
+    },
+    []
+  );
+
+  return queryArray.join('&');
 };

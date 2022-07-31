@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 import { Box, Typography } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { memo, ReactNode } from 'react';
-import { NFTItem } from '../../types';
+import { NFTItem } from '../types';
 
 type ResultsProps = {
   result: Array<NFTItem>;
@@ -12,7 +12,7 @@ type ResultsProps = {
 export const Results = memo<ResultsProps>(({ result, isLoading }) => {
   if (isLoading) {
     return (
-      <Box>
+      <Box style={{ padding: '20px' }}>
         <Typography variant="h4" color="#1976d2">
           Loading...
         </Typography>

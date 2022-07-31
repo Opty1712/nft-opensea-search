@@ -11,4 +11,5 @@ export type MetaDataJSON = {
   animation_url?: string;
 };
 
-export type NFTItem = Omit<APIItem, 'metadata'> & MetaDataJSON & { id: string };
+export type NFTItem = Omit<APIItem, 'metadata'> &
+  MetaDataJSON & { id: string; price?: string };

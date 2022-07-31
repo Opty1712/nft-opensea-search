@@ -5,7 +5,16 @@ import { useSearch } from './useSearch';
 
 export const NFTContainer = () => {
   const { account } = useAccount();
-  const { search, setSearch, searchResults, isLoading } = useSearch(account);
+  const {
+    search,
+    setSearch,
+    searchResults,
+    isLoading,
+    fromDate,
+    setFromDate,
+    setToDate,
+    toDate
+  } = useSearch(account);
 
   return (
     <Box
@@ -25,11 +34,22 @@ export const NFTContainer = () => {
           margin: '0 40px'
         }}
       >
-        {account ? <Search search={search} setSearch={setSearch} /> : <div />}
+        {account ? (
+          <Search
+            search={search}
+            setSearch={setSearch}
+            fromDate={fromDate}
+            setFromDate={setFromDate}
+            toDate={toDate}
+            setToDate={setToDate}
+          />
+        ) : (
+          <div />
+        )}
         <Wallet />
       </Box>
 
-      {account && search ? (
+      {account && search.length > 2 ? (
         <Box
           style={{
             width: 'calc(100% - 80px)',

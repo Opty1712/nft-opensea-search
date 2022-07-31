@@ -14,7 +14,7 @@ export const Wallet = memo(() => {
       {account ? (
         <Box
           style={{
-            display: 'inline-block',
+            display: 'flex',
             marginLeft: '40px'
           }}
         >
@@ -31,6 +31,7 @@ export const Wallet = memo(() => {
               startIcon={<LogoutIcon />}
               onClick={disconnectWallet}
               variant="contained"
+              size="large"
             >
               Disconnect {formatAddress(account)}
             </Button>
@@ -38,7 +39,7 @@ export const Wallet = memo(() => {
               <div
                 key={key}
                 style={{
-                  padding: '10px 13px'
+                  padding: '15px 20px'
                 }}
               >
                 <PixIcon
@@ -59,6 +60,7 @@ export const Wallet = memo(() => {
         <Button
           onClick={connectWallet}
           variant="contained"
+          size="large"
           startIcon={<AccountBalanceWalletIcon />}
         >
           Connect Wallet
