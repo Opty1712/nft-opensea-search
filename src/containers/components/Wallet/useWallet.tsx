@@ -6,9 +6,9 @@ import { WebsocketProvider } from 'web3-core/types';
 import { Contract } from 'web3-eth-contract';
 import { AbiItem } from 'web3-utils';
 import Web3Modal from 'web3modal';
-import ERC20ABI from '../../config/ERC20ABI.json';
-import { useAccount } from '../../context';
-import { bnToDec, decToHexString, getKeys, isClientSide } from '../../utils';
+import ERC20ABI from '../../../config/ERC20ABI.json';
+import { useAccount } from '../../../context';
+import { bnToDec, decToHexString, getKeys, isClientSide } from '../../../utils';
 
 type Web3Provider = WebsocketProvider & MetaMaskInpageProvider;
 

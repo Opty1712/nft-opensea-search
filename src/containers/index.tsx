@@ -1,1 +1,1 @@
-export { Container } from './Container';
+export { NFTContainer as Container } from './Container';
