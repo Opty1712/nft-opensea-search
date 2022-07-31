@@ -12,7 +12,12 @@ export const Wallet = memo(() => {
   return (
     <>
       {account ? (
-        <Box style={{ display: 'inline-block' }}>
+        <Box
+          style={{
+            display: 'inline-block',
+            marginLeft: '40px'
+          }}
+        >
           <Box
             style={{
               background: '#fff',
@@ -29,7 +34,7 @@ export const Wallet = memo(() => {
             >
               Disconnect {formatAddress(account)}
             </Button>
-            {Object.entries(balance || []).map(([key, value]) => (
+            {Object.entries(balance || {}).map(([key, value]) => (
               <div
                 key={key}
                 style={{

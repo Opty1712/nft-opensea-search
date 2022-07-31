@@ -1,14 +1,16 @@
 import { Box, TextField } from '@mui/material';
-import { ChangeEventHandler, memo, useCallback, useState } from 'react';
+import { ChangeEventHandler, memo, useCallback } from 'react';
 
-export const Search = memo(() => {
-  const [search, setSearch] = useState('');
-
+type SearchParams = {
+  search: string;
+  setSearch: (search: string) => void;
+};
+export const Search = memo<SearchParams>(({ search, setSearch }) => {
   const handleSearch = useCallback<ChangeEventHandler<HTMLInputElement>>(
     (event) => {
       setSearch(event.target.value);
     },
-    []
+    [setSearch]
   );
 
   return (
@@ -16,14 +18,17 @@ export const Search = memo(() => {
       style={{
         background: '#fff',
         borderRadius: '5px',
-        padding: '10px 13px',
-        boxSizing: 'border-box'
+        padding: '20px',
+        boxSizing: 'border-box',
+        width: '100%',
+        maxWidth: '50%'
       }}
     >
       <TextField
         onChange={handleSearch}
         value={search}
         placeholder="Search for NFT"
+        fullWidth={true}
       />
     </Box>
   );
