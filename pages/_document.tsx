@@ -29,18 +29,17 @@ export default class MyDocument extends Document<{
           />
           {this.props.emotionStyleTags}
         </Head>
-        <body>
-          <div
-            style={{
-              backgroundImage: `url(${background})`,
-              height: '100vh',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          >
-            <Main />
-            <NextScript />
-          </div>
+        <body
+          style={{
+            backgroundImage: `url(${background})`,
+            height: '100vh',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed'
+          }}
+        >
+          <Main />
+          <NextScript />
         </body>
       </Html>
     );

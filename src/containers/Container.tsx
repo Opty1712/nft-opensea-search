@@ -1,3 +1,4 @@
+import { css } from '@emotion/css';
 import { Box } from '@mui/material';
 import { useAccount } from '../context';
 import { Results, Search, Wallet } from './components';
@@ -17,23 +18,8 @@ export const NFTContainer = () => {
   } = useSearch(account);
 
   return (
-    <Box
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        maxHeight: '100vh'
-      }}
-    >
-      <Box
-        style={{
-          display: 'flex',
-          width: 'calc(100% - 80px)',
-          justifyContent: 'space-between',
-          alignItems: 'stretch',
-          paddingTop: '40px',
-          margin: '0 40px'
-        }}
-      >
+    <Box className={rootStyle}>
+      <Box className={headerStyle}>
         {account ? (
           <Search
             search={search}
@@ -50,16 +36,7 @@ export const NFTContainer = () => {
       </Box>
 
       {account && search.length > 2 ? (
-        <Box
-          style={{
-            width: 'calc(100% - 80px)',
-            margin: '40px',
-            overflow: 'auto',
-            background: '#fff',
-            borderRadius: '5px',
-            boxSizing: 'border-box'
-          }}
-        >
+        <Box className={resultStyle}>
           <Results result={searchResults} isLoading={isLoading} />
         </Box>
       ) : (
@@ -68,3 +45,39 @@ export const NFTContainer = () => {
     </Box>
   );
 };
+
+const headerStyle = css`
+  display: flex;
+  width: calc(100% - 80px);
+  justify-content: space-between;
+  align-items: stretch;
+  padding-top: 40px;
+  margin: 0 40px;
+
+  @media (max-width: 600px) {
+    display: block;
+  }
+`;
+
+const rootStyle = css`
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+
+  @media (max-width: 600px) {
+    max-height: inherit;
+  }
+`;
+
+const resultStyle = css`
+  width: calc(100% - 80px);
+  margin: 40px;
+  overflow: auto;
+  background: #fff;
+  border-radius: 5px;
+  box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    overflow: inherit;
+  }
+`;

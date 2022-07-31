@@ -1,3 +1,4 @@
+import { css } from '@emotion/css';
 import { Box, TextField } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -23,16 +24,7 @@ export const Search = memo<SearchParams>(
 
     return (
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Box
-          style={{
-            background: '#fff',
-            borderRadius: '5px',
-            padding: '20px',
-            boxSizing: 'border-box',
-            width: '100%',
-            maxWidth: '50%'
-          }}
-        >
+        <Box className={searchStyle}>
           <TextField
             label="Name"
             onChange={handleSearch}
@@ -68,3 +60,18 @@ export const Search = memo<SearchParams>(
   }
 );
 Search.displayName = nameof(Search);
+
+const searchStyle = css`
+  background: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 50%;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+`;

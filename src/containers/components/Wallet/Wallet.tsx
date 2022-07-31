@@ -1,3 +1,4 @@
+import { css } from '@emotion/css';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PixIcon from '@mui/icons-material/Pix';
@@ -12,12 +13,7 @@ export const Wallet = memo(() => {
   return (
     <>
       {account ? (
-        <Box
-          style={{
-            display: 'flex',
-            marginLeft: '40px'
-          }}
-        >
+        <Box className={walletStyle}>
           <Box
             style={{
               background: '#fff',
@@ -31,6 +27,7 @@ export const Wallet = memo(() => {
               startIcon={<LogoutIcon />}
               onClick={disconnectWallet}
               variant="contained"
+              className={buttonStyle}
               size="large"
             >
               Disconnect {formatAddress(account)}
@@ -61,6 +58,7 @@ export const Wallet = memo(() => {
           onClick={connectWallet}
           variant="contained"
           size="large"
+          className={buttonStyle}
           startIcon={<AccountBalanceWalletIcon />}
         >
           Connect Wallet
@@ -70,3 +68,20 @@ export const Wallet = memo(() => {
   );
 });
 Wallet.displayName = nameof(Wallet);
+
+const walletStyle = css`
+  display: flex;
+  margin-left: 40px;
+
+  @media (max-width: 600px) {
+    margin-left: 0;
+    margin-top: 40px;
+  }
+`;
+
+const buttonStyle = css`
+  @media (max-width: 600px) {
+    width: 100%;
+    justify-content: flex-start;
+  }
+`;
