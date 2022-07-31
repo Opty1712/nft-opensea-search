@@ -56,6 +56,8 @@ const headerStyle = css`
 
   @media (max-width: 600px) {
     display: block;
+    width: 100%;
+    margin: 0;
   }
 `;
 
@@ -79,5 +81,7 @@ const resultStyle = css`
 
   @media (max-width: 600px) {
     overflow: inherit;
+    width: 100%;
+    margin: 40px 0;
   }
 `;
