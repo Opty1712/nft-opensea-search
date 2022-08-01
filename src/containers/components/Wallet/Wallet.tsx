@@ -75,7 +75,8 @@ const walletStyle = css`
 
   @media (max-width: 600px) {
     margin-left: 0;
-    margin-top: 40px;
+    margin-top: 0px;
+    margin-bottom: 40px;
   }
 `;
 

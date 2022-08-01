@@ -55,7 +55,7 @@ const headerStyle = css`
   margin: 0 40px;
 
   @media (max-width: 600px) {
-    display: block;
+    flex-direction: column-reverse;
     width: 100%;
     margin: 0;
   }
